@@ -1,0 +1,25 @@
+# Implantação Render Free — Grupo Inconecta · ESTELA
+# Nunca coloque tokens, senhas ou credenciais neste arquivo.
+services:
+  - type: web
+    name: grupo-inconecta
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.22.0
+      - key: SESSION_MAX_AGE_MS
+        value: "28800000"
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+# APP_ORIGIN é opcional no endereço *.onrender.com, graças a RENDER_EXTERNAL_URL.
+# Se usar domínio próprio, configure APP_ORIGIN no painel Render.
